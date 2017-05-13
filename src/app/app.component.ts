@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   recipes: number = 1;
-
+  
   onPageSelect(recipes) {
     this.recipes = recipes;
   }

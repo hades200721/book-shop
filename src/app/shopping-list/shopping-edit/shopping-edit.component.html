@@ -10,11 +10,11 @@
         <input type="number" id="amount" class="form-control" #amountInput>
       </div>
       <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-success" type="submit">Add</button>
-        <button class="btn btn-danger" type="submit">Delete</button>
-        <button class="btn btn-primary" type="submit">Clear</button>
-      </div>
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" (click)="onSaveIngredient()">Add</button>
+          <button class="btn btn-danger" type="submit">Delete</button>
+          <button class="btn btn-primary" type="submit" (click)="clearIngredient()">Clear</button>
+        </div>
       </div>
     </form>
   </div>
