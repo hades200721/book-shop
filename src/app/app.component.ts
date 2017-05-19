@@ -8,9 +8,4 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   providers: [ShoppingListService]
 })
 export class AppComponent {
-  recipes: number = 1;
-
-  onPageSelect(recipes) {
-    this.recipes = recipes;
-  }
 }

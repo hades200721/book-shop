@@ -15,6 +15,9 @@ import { BasicHighlightDirective } from './shared/basic-highlight.directive';
 import { AdvancedHighlightDirective } from './shared/advanced-highlight.directive';
 import { UnlessDirective } from './shared/unless.directive';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { AppRoutingModule } from './app-routing';
+import { EmptyPageComponent } from './empty-page/empty-page.component';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +32,16 @@ import { DropdownDirective } from './shared/dropdown.directive';
     BasicHighlightDirective,
     AdvancedHighlightDirective,
     UnlessDirective,
-    DropdownDirective
+    DropdownDirective,
+    EmptyPageComponent,
+    RecipeStartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
