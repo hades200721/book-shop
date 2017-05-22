@@ -1,8 +1,13 @@
 import {
-  Component, OnInit,
-  ViewChild, ElementRef,
-  Output, EventEmitter, Renderer
+  Component,
+  OnInit,
+  Output,
+  Renderer,
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { FormsModule, NgForm, FormGroup } from '@angular/forms';
 import { Ingredient } from './../../shared/ingredient.model';
 import { ShoppingListService } from './../shopping-list.service';
 
@@ -11,24 +16,36 @@ import { ShoppingListService } from './../shopping-list.service';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
 
-  @ViewChild('nameInput') ingredientName: ElementRef;
-  @ViewChild('amountInput') ingredientAmount: ElementRef;
-
-  constructor(private renderer: Renderer, private shoppingListService: ShoppingListService) { }
+  @ViewChild('f') signupForm: NgForm;
+  subscription: Subscription;
+  editMode: boolean = false;
+  editedItemInde: number;
+  editedIngrdient: Ingredient;
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
+    this.subscription = this.shoppingListService.startedEditing
+    .subscribe(
+      (index: number) => {
+        this.editMode = true;
+        this.editedItemInde = index;
+        this.editedIngrdient = this.shoppingListService.getIndexIngredient(index);
+        this.signupForm.setValue({
+          'name' : this.editedIngrdient.name,
+          'amount' : this.editedIngrdient.amount
+        })
+      }
+    )
   }
 
-  clearIngredient() {
-    this.renderer.setElementProperty(this.ingredientName.nativeElement, 'value', '');
-    this.renderer.setElementProperty(this.ingredientAmount.nativeElement, 'value', '');
-
+  onAddItem(form: NgForm) {
+    const value = form.value;
+    this.shoppingListService.addIngredient(value.name, value.amount);
   }
 
-  onSaveIngredient() {
-    this.shoppingListService.addIngredient(this.ingredientName.nativeElement.value, this.ingredientAmount.nativeElement.value);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
-
 }
