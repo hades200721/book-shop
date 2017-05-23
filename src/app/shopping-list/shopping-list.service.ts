@@ -27,6 +27,18 @@ export class ShoppingListService {
         this.ingredientChanged.next(this.ingredients.slice());
     }
 
+    updateIngredient(index: number, newIngrdient: Ingredient) {
+        this.ingredients[index] = newIngrdient;
+        this.ingredientChanged.next(this.ingredients.slice());
+    }
+
+    removeIngredient(index: number) {
+        // we actually removing the item here
+        this.ingredients.splice(index, 1);
+        // returning a copy of our new ingredients array
+        this.ingredientChanged.next(this.ingredients.slice());
+    }
+
     addRecipesToShoppingList(ingredients: Ingredient[]) {
         this.ingredients = this.ingredients.concat(ingredients);
         this.ingredientChanged.next(this.ingredients.slice());
