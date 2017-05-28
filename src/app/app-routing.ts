@@ -7,6 +7,8 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const appRoutes: Route[] = [
     { path: '', component: EmptyPageComponent, pathMatch: 'full' },
@@ -19,6 +21,8 @@ const appRoutes: Route[] = [
         ]
     },
     { path: 'shopping-list', component: ShoppingListComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'signin', component: SigninComponent }
 ]
 
 @NgModule({
