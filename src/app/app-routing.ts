@@ -9,14 +9,15 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes: Route[] = [
     { path: '', component: EmptyPageComponent, pathMatch: 'full' },
     {
         path: 'recipes', component: RecipesComponent, children: [
             { path: '', component: RecipeStartComponent },
-            { path: 'new', component: RecipeEditComponent },
-            { path: ':id/edit', component: RecipeEditComponent }, // with data filled in...
+            { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
+            { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] }, // with data filled in...
             { path: ':id', component: RecipeDetailComponent }
         ]
     },
